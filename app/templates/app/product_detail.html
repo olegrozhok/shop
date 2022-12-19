@@ -17,6 +17,11 @@
                     <li>{{ product.description }}</li>
                     <br>
                 </ul>
+                <br><br><h4>Description</h4>
+                <ul class="fs-5" style="font-family: Rajdhani;">
+                    <li>{{ product.composition }}</li>
+                    <br>
+                </ul>
                 <div class="button row flex" style="font-family: Rajdhani;">
                     <form action="/add-to-cart" class="d-inline">
                     <input type="hidden" name="prod_id" value="{{ product.id }}"/>
