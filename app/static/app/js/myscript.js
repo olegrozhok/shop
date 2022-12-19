@@ -101,7 +101,7 @@ $('.minus-wishlist').click(function(){
             prod_id:id
         },
         success:function(data){
-            window.location.href = `https://klaif.pythonanywhere.com//product-detail/${id}`
+            window.location.href = `https://klaif.pythonanywhere.com/product-detail/${id}`
         }
     })
 })
