@@ -20,11 +20,11 @@
                     <div class="card-body">
                         <h5>Product : {{ item.product.title }}</h5>
                         <p>Quantity: {{ item.quantity }}</p>
-                        <p class="fw-bold">Price: {{ item.product.discounted_price }}</p>
+                        <p class="fw-bold">Price: {{ item.product.discounted_price }} RUB.</p>
                     </div>
                 </div>
             {% endfor %}
-            <p class="fw-bold">Total cost + 500 RUB. = {{ totalamount }}</p>
+            <p class="fw-bold">Total cost + 500 RUB. = {{ totalamount }} RUB.</p>
             <small>Term and Conditions:</small>
         </div>
         <div class="col-sm-4 offset-sm-1">
@@ -46,8 +46,8 @@
                 </div>
                 {% endfor %}
                 <div class="form-check mb-3">
-                    <label for="totalamount" class="form-label">Total amount</label>
-                    <input type="number" class="form-control" name="totalamount" value="{{ totalamount }}" readonly>
+                    <label for="totalamount" class="form-label">Total amount, RUB.</label>
+                    <p><input type="number" class="form-control" name="totalamount" value="{{ totalamount }}"  readonly></p>
                 </div>
                 <div class="text-end">
                     <button id="yam-button" type="submit" class="btn btn-primary mt-3 px-5 fw-bold">Payment</button>
