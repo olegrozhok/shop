@@ -100,10 +100,9 @@ CATEGORY_CHOICES = (
     ('NB', 'Notebooks'),
     ('PC', 'PCs'),
     ('PH', 'Phones'),
-    ('MN', 'Monitors'),
     ('WF', 'Wi-Fi routers'),
     ('IP', 'IP cameras'),
-    # ('AC', 'Accessories'),
+    ('AC', 'Accessories'),
 )
 
 
