@@ -6,6 +6,8 @@ from django.db.models import Count
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -18,7 +20,7 @@ def home(request):
         wishitem = len(Wishlist.objects.filter(user=request.user))
     return render(request, "app/home.html", locals())
 
-
+@login_required
 def about(request):
     totalitem = 0
     wishitem = 0
@@ -28,6 +30,7 @@ def about(request):
     return render(request, "app/about.html", locals())
 
 
+@login_required
 def contact(request):
     totalitem = 0
     wishitem = 0
@@ -35,6 +38,7 @@ def contact(request):
         totalitem = len(Cart.objects.filter(user=request.user))
         wishitem = len(Wishlist.objects.filter(user=request.user))
     return render(request, "app/contact.html", locals())
+
 
 
 class CategoryView(View):
@@ -49,6 +53,9 @@ class CategoryView(View):
         return render(request, "app/category.html", locals())
 
 
+
+
+@method_decorator(login_required, name='dispatch')
 class CategoryTitle(View):
     def get(self, request, val):
         product = Product.objects.filter(title=val)
@@ -61,6 +68,7 @@ class CategoryTitle(View):
         return render(request, "app/category.html", locals())
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductDetail(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
@@ -73,6 +81,7 @@ class ProductDetail(View):
         return render(request, "app/product_detail.html", locals())
 
 
+@method_decorator(login_required, name='dispatch')
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
@@ -93,6 +102,7 @@ class CustomerRegistrationView(View):
         return render(request, 'app/customerregistration.html', locals())
 
 
+@method_decorator(login_required, name='dispatch')
 class ProfileView(View):
     def get(self, request):
         form = CustomerProfileForm()
@@ -123,6 +133,7 @@ class ProfileView(View):
         return render(request, 'app/profile.html', locals())
 
 
+@login_required
 def address(request):
     add = Customer.objects.filter(user=request.user)
     totalitem = 0
@@ -133,6 +144,7 @@ def address(request):
     return render(request, 'app/address.html', locals())
 
 
+@method_decorator(login_required, name='dispatch')
 class updateAddress(View):
     def get(self, request, pk):
         add = Customer.objects.get(pk=pk)
@@ -161,6 +173,7 @@ class updateAddress(View):
         return redirect('address')
 
 
+@login_required
 def add_to_cart(request):
     user = request.user
     product_id = request.GET.get('prod_id')
@@ -190,6 +203,7 @@ def add_to_cart(request):
         return redirect('/cart')
 
 
+@login_required
 def show_cart(request):
     user = request.user
     cart = Cart.objects.filter(user=user)
@@ -218,6 +232,7 @@ def show_wishlist(request):
         return render(request, 'app/wishlist.html', locals())
 
 
+@method_decorator(login_required, name='dispatch')
 class checkout(View):
     def get(self, request):
         totalitem = 0
